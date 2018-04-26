@@ -1,0 +1,28 @@
+{
+  "name": "sourcerer-task-runner",
+  "version": "1.0.0",
+  "description": "A boilerplate for Node CLI apps",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./app.js",
+    "lint": "node_modules/eslint/bin/eslint.js .",
+    "test": "mocha --timeout 10000"
+  },
+  "author": "mkora",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.0",
+    "dotenv": "^5.0.1",
+    "get-stdin": "^6.0.0",
+    "meow": "^5.0.0",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "mocha": "^5.1.1"
+  }
+}
