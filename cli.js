@@ -13,6 +13,11 @@ dotenv.load({
   path: '.env.example',
 });
 
+/**
+ * Init CLI object
+ *  + add non-flag arguments
+ *  + add flags (options) and its descriptions
+ */
 const cli = meow(`
   Usage:
     $ foo <input> [options]
@@ -21,17 +26,17 @@ const cli = meow(`
     shout
 
   Options:
-    --text TEXT         text for trasformation
+    -t, --text TEXT   text for trasformation
 
   Examples:
-    $ foo shout --text
+    $ foo shout --text='Oh, no!'
 
   Other options:
-    -h, --help          show usage information
-    -v, --version       print version info and exit
+    --help            show usage information
+    --version         print version info and exit    
   `, {
   flags: {
-    type: {
+    text: {
       type: 'string',
       alias: 't',
       default: 'Shut up, Meg!',
@@ -39,14 +44,18 @@ const cli = meow(`
   },
 });
 
-const actions = (action, flags) => {
-  const { text } = flags;
+const actions = (action, flags, help) => {
   if (action === 'shout') {
-    const output = text.toUpperCase();
-    console.log(output);
+    const { text } = flags;
+    if (text) {
+      const output = text.toUpperCase();
+      console.log(output);
+    } else {
+      console.log(text);
+    }
   } else {
-    console.log(text);
+    console.log(help);
   }
 };
 
-actions(cli.input, cli.flags);
+actions(cli.input[0], cli.flags, cli.help);
