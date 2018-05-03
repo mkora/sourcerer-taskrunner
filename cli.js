@@ -1,7 +1,12 @@
 const dotenv = require('dotenv');
-// const logger = require('./utils/logger');
 const meow = require('meow');
-const chalk = require('chalk');
+const {
+  error,
+  warn,
+  success,
+  debug,
+  log,
+} = require('./utils/chalk-init');
 const getStdin = require('get-stdin');
 
 /**
@@ -49,12 +54,13 @@ const actions = (action, flags, help) => {
     const { text } = flags;
     if (text) {
       const output = text.toUpperCase();
-      console.log(output);
+      log(output);
     } else {
-      console.log(text);
+      log(text);
     }
+    success('Done!');
   } else {
-    console.log(help);
+    log(help);
   }
 };
 
