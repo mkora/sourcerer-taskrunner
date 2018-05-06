@@ -4,14 +4,17 @@
   "description": "A boilerplate for Node CLI apps",
   "main": "app.js",
   "scripts": {
-    "start": "node ./cli.js",
     "lint": "node_modules/eslint/bin/eslint.js .",
     "test": "mocha --timeout 10000"
+  },
+  "bin": {
+    "util": "./cli.js"
   },
   "author": "mkora",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.0",
+    "console-log-level": "^1.4.0",
     "dotenv": "^5.0.1",
     "get-stdin": "^6.0.0",
     "meow": "^5.0.0",

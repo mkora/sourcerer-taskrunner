@@ -5,7 +5,7 @@ const {
   warn,
   success,
   debug,
-  log,
+  message,
 } = require('./utils/chalk-init');
 const getStdin = require('get-stdin');
 
@@ -14,7 +14,10 @@ const getStdin = require('get-stdin');
  * where API keys and passwords are configured
  */
 dotenv.load({
-  // TODO: check existance of .env file and then load
+  //  - TODO : check existance of .env file and then load
+  /**
+   * - TODO : add log-level (default: info, but my: debug, production: error)
+   */
   path: '.env.example',
 });
 
@@ -54,13 +57,13 @@ const actions = (action, flags, help) => {
     const { text } = flags;
     if (text) {
       const output = text.toUpperCase();
-      log(output);
+      message(output);
     } else {
-      log(text);
+      message(text);
     }
-    success('Done!');
+    success('Done');
   } else {
-    log(help);
+    message(help);
   }
 };
 
