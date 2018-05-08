@@ -5,9 +5,9 @@ const {
   warn,
   success,
   debug,
-  message,
+  log,
 } = require('./utils/chalk-init');
-const getStdin = require('get-stdin');
+const inquirer = require('inquirer');
 
 /**
  * Load environment variables from .env file
@@ -16,7 +16,8 @@ const getStdin = require('get-stdin');
 dotenv.load({
   //  - TODO : check existance of .env file and then load
   /**
-   * - TODO : add log-level (default: info, but my: debug, production: error)
+   * - TODO : add log-level  to config
+   * (default: info, but my: debug, production: error)
    */
   path: '.env.example',
 });
@@ -28,7 +29,8 @@ dotenv.load({
  */
 const cli = meow(`
   Usage:
-    $ foo <input> [options]
+    $ node cli.js <input> [options]
+    $ util <input> [options]
 
   Input:
     shout
@@ -37,7 +39,7 @@ const cli = meow(`
     -t, --text TEXT   text for trasformation
 
   Examples:
-    $ foo shout --text='Oh, no!'
+    $ util shout --text='Oh, no!'
 
   Other options:
     --help            show usage information
@@ -52,19 +54,57 @@ const cli = meow(`
   },
 });
 
-const actions = (action, flags, help) => {
+/**
+ * Init promting question object
+ * for mo options see Inquirer documentation
+ */
+const questions = [
+  {
+    type: 'confirm',
+    name: 'sure',
+    message: 'Are you sure you want to shout?',
+    default: true,
+  },
+];
+
+/**
+ * Reacts on cli input and options
+ *
+ * @param {string} action   first non-flag argument
+ * @param {object} flags    flag values
+ */
+const actions = (action, flags) => {
   if (action === 'shout') {
     const { text } = flags;
     if (text) {
       const output = text.toUpperCase();
-      message(output);
+      log(output);
     } else {
-      message(text);
+      log(text);
     }
     success('Done');
   } else {
-    message(help);
+    warn('Missed action. Not sure what to do');
   }
 };
 
-actions(cli.input[0], cli.flags, cli.help);
+/**
+ * Main Part
+ * (code here)
+ */
+if (cli.input[0] === undefined) {
+  log(cli.help);
+  process.exit();
+}
+
+inquirer.prompt(questions).then((answers) => {
+  debug(JSON.stringify(cli, null, '  '));
+  debug(JSON.stringify(answers, null, '  '));
+
+  if (answers.sure) {
+    actions(cli.input[0], cli.flags, cli.help);
+  } else {
+    success('Good boy!');
+  }
+});
+
