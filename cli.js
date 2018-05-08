@@ -1,26 +1,12 @@
-const dotenv = require('dotenv');
 const meow = require('meow');
 const {
-  error,
-  warn,
-  success,
-  debug,
+  error, // eslint-disable-line no-unused-vars
+  warn, // eslint-disable-line no-unused-vars
+  success, // eslint-disable-line no-unused-vars
+  debug, // eslint-disable-line no-unused-vars
   log,
 } = require('./utils/chalk-init');
 const inquirer = require('inquirer');
-
-/**
- * Load environment variables from .env file
- * where API keys and passwords are configured
- */
-dotenv.load({
-  //  - TODO : check existance of .env file and then load
-  /**
-   * - TODO : add log-level  to config
-   * (default: info, but my: debug, production: error)
-   */
-  path: '.env.example',
-});
 
 /**
  * Init CLI object

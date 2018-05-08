@@ -1,6 +1,12 @@
-const logIt = require('console-log-level')({ level: 'info' });
+const dotenv = require('dotenv');
 const chalk = require('chalk');
 const logSymbols = require('log-symbols');
+
+dotenv.load({
+  path: '.env.example',
+});
+
+const logIt = require('console-log-level')({ level: process.env.LOG_LEVEL });
 
 const error = msg => logIt.error(`${logSymbols.error} ${chalk.bold.red(msg)}`);
 const warn = msg => logIt.warn(`${logSymbols.warning} ${chalk.keyword('orange')(msg)}`);
