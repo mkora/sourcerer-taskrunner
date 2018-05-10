@@ -1,26 +1,49 @@
 # Sourcerer's Boilerplate
 
-Node.js, Meow
+Node.js, Meow.js, Inquirer.js
 
 ## Overview
 
 A boilerplate for a Node.js CLI applications
 
+Souts at you if you want to
+
 ## Notes
 
-- Uses `winston` as a logger for everything else
+- Uses `meow` as CLI helper
+
+- Uses `inquirer` as interctive CLI user interface
 
 - Loads environment variables from `.env` file
 
-- Uses `error-handler`
+- Full list of log levels:
 
-- Uses `meow` as CLI helper
+  ```
+  trace
+  debug   - use it for development
+  info    - default value is set in `.env.example` from `util/chalk-init`
+  warn
+  error   - use it for production
+  fatal
+  ```
+
+- Full list of logging functions:
+
+  ```
+  error
+  warn
+  success
+  debug
+  log
+  ```
+
+- A CLI tool name is `util`. Change it in `package.json`
 
 - Linter config extends airbnb's
 
 ## Quick Start
 
-1. Make a new one:
+1. Make a new one
 
   ```
   # Clone
@@ -33,26 +56,23 @@ A boilerplate for a Node.js CLI applications
   npm i
   ```
 
-2. Run a task
+2. Run a CLI tool
 
-- Run a script (if it's not a cli tool yet):
+  ```
+  # Help
+  util --help
+  node cli.js --help
+  # Shout by default
+  util shout
+  node node cli.js shout
+  # Shout with a text option
+  util shout --text='Oh, no!'
+  node cli.js shout --text='Oh, no!'
+  ```
 
-    ```
-    LOG_LEVEL=debug node gen save
-    LOG_LEVEL=debug node gen output ./dump.json
-    ```
+3. Make it a real CLI tool:
 
-- Make it a real CLI tool:
-
-  - Add a shebang `#!/usr/bin/env node`
-
-  - Update `package.json`
-
-    ```
-      "bin" : {
-        "dough-maker" : "./gen.js"
-      }
-    ```
+  - NOTE: Don't forget to add a shebang `#!/usr/bin/env node` to `cli.js` and update `bin` sction in `package.js`
 
   - Make it global
 
@@ -60,7 +80,7 @@ A boilerplate for a Node.js CLI applications
     npm install -g
     ```
 
-  - IMPORTANT: After any changes in ./gen.js don't forget to run
+  - IMPORTANT: After any changes in `./cli.js` don't forget to run
 
     ```
     npm link
