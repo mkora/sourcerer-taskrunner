@@ -50,7 +50,7 @@ Souts at you if you want to
   git clone git@github.com:mkora/sourcerer-taskrunner.git
   cd sourcerer-taskrunner
 
-  rm -rf .git && git init && npm init
+  rm -rf .git && git init && npm i
   
   # Install dependencies
   npm i
