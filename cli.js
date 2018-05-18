@@ -84,8 +84,8 @@ if (cli.input[0] === undefined) {
 }
 
 inquirer.prompt(questions).then((answers) => {
-  debug(JSON.stringify(cli, null, '  '));
-  debug(JSON.stringify(answers, null, '  '));
+  debug(cli);
+  debug(answers);
 
   if (answers.sure) {
     actions(cli.input[0], cli.flags, cli.help);
