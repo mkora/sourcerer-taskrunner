@@ -1,4 +1,4 @@
-# Sourcerer's Boilerplate
+# Sourcerer's Taskrunner
 
 Node.js, Meow.js, Inquirer.js
 
@@ -6,7 +6,7 @@ Node.js, Meow.js, Inquirer.js
 
 A boilerplate for a Node.js CLI applications
 
-Souts at you if you want to
+Shouts at you if you want to
 
 ## Notes
 
